@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Behind Every Screen — Confronting Cyberbullying</title>
+<meta name="description" content="A media & information literacy guide on cyberbullying, netiquette, and digital empowerment." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-black:#010604;
+    --deep-green:#102317;
+    --pine-green:#0E241B;
+    --sage:#4D674D;
+    --umber:#683D17;
+    --ochre:#8A5F18;
+    --paper:#EFEEE6;
+    --paper-dim:#B9C2B7;
+
+    --font-display:'Fraunces', serif;
+    --font-body:'Work Sans', sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink-black);
+    color:var(--paper);
+    font-family:var(--font-body);
+    font-weight:300;
+    line-height:1.6;
+  }
+  ::selection{background:var(--ochre); color:var(--ink-black);}
+
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  h1,h2,h3,.display{
+    font-family:var(--font-display);
+    font-weight:500;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .9s ease, transform .9s ease;
+  }
+  .reveal.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:50;
+    background:linear-gradient(to bottom, rgba(1,6,4,0.92), rgba(1,6,4,0));
+    padding:20px 0;
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{
+    font-family:var(--font-display);
+    font-size:1.15rem;
+    letter-spacing:0.02em;
+  }
+  .brand span{color:var(--ochre);}
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:28px;
+    margin:0; padding:0;
+  }
+  nav a{
+    font-size:0.82rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    text-decoration:none;
+    color:var(--paper-dim);
+    transition:color .3s ease;
+  }
+  nav a:hover, nav a:focus-visible{color:var(--paper);}
+  @media (max-width:760px){
+    nav ul{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    padding:140px 0 100px;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(77,103,77,0.35), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(138,95,24,0.18), transparent 60%),
+      linear-gradient(180deg, var(--ink-black) 0%, var(--pine-green) 100%);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(239,238,230,0.025) 0px, rgba(239,238,230,0.025) 1px, transparent 1px, transparent 90px);
+    pointer-events:none;
+  }
+  .eyebrow-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:28px;
+  }
+  .eyebrow-row .rule{
+    width:44px; height:1px; background:var(--ochre);
+  }
+  .eyebrow-row span{
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    color:var(--ochre);
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 6.6vw, 5.2rem);
+    line-height:0.98;
+    max-width:15ch;
+    color:var(--paper);
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--sage);
+  }
+  .hero p.lede{
+    max-width:46ch;
+    margin-top:28px;
+    font-size:1.05rem;
+    color:var(--paper-dim);
+  }
+  .hero-cta{
+    margin-top:44px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 28px;
+    border-radius:999px;
+    font-size:0.88rem;
+    letter-spacing:0.03em;
+    text-decoration:none;
+    transition:transform .35s ease, background .35s ease, border-color .35s ease;
+    cursor:pointer;
+    border:1px solid transparent;
+  }
+  .btn-solid{
+    background:var(--ochre);
+    color:var(--ink-black);
+    font-weight:500;
+  }
+  .btn-solid:hover{transform:translateY(-2px); background:#a1721f;}
+  .btn-ghost{
+    border-color:rgba(239,238,230,0.28);
+    color:var(--paper);
+  }
+  .btn-ghost:hover{border-color:var(--sage); transform:translateY(-2px);}
+
+  /* ---------- section scaffolding ---------- */
+  section{
+    padding:120px 0;
+    position:relative;
+    border-top:1px solid rgba(239,238,230,0.08);
+  }
+  .section-head{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:40px;
+    margin-bottom:56px;
+  }
+  .section-tag{
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    color:var(--ochre);
+    padding-top:8px;
+  }
+  .section-head h2{
+    font-size:clamp(1.9rem, 3.6vw, 2.8rem);
+    max-width:18ch;
+    color:var(--paper);
+  }
+  @media (max-width:760px){
+    .section-head{grid-template-columns:1fr; gap:12px;}
+  }
+
+  /* alternating section tints */
+  #definition{background:var(--deep-green);}
+  #netiquette{background:var(--ink-black);}
+  #impacts{background:var(--pine-green);}
+  #bystander{background:var(--ink-black);}
+  #reporting{background:var(--deep-green);}
+  #action-plan{background:var(--ink-black);}
+  #cta{background:var(--pine-green);}
+
+  /* ---------- definition / pull quote ---------- */
+  .definition-body{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:40px;
+  }
+  .definition-body p{
+    font-size:1.15rem;
+    color:var(--paper);
+    max-width:62ch;
+  }
+  .definition-body p + p{margin-top:20px; color:var(--paper-dim); font-size:1rem;}
+  @media (max-width:760px){
+    .definition-body{grid-template-columns:1fr;}
+  }
+
+  /* ---------- netiquette checklist ---------- */
+  .rule-list{
+    display:grid;
+    gap:0;
+    grid-template-columns:220px 1fr;
+  }
+  .rule-list .intro{
+    color:var(--paper-dim);
+    font-size:0.98rem;
+    max-width:34ch;
+  }
+  .rule-items{border-top:1px solid rgba(239,238,230,0.12);}
+  .rule-item{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:6px;
+    padding:24px 0;
+    border-bottom:1px solid rgba(239,238,230,0.12);
+  }
+  .rule-item p{margin:0; color:var(--paper-dim); font-size:0.97rem; max-width:60ch;}
+  .rule-item .rule-title{
+    font-family:var(--font-display);
+    font-size:1.1rem;
+    color:var(--paper);
+  }
+  @media (max-width:760px){
+    .rule-list{grid-template-columns:1fr; gap:20px;}
+  }
+
+  /* ---------- impacts ---------- */
+  .impacts-grid{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:40px;
+  }
+  .impact-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:28px;
+  }
+  .impact-tag{
+    border:1px solid var(--sage);
+    color:var(--sage);
+    border-radius:999px;
+    padding:7px 16px;
+    font-size:0.82rem;
+    letter-spacing:0.03em;
+  }
+  .impacts-text p{
+    color:var(--paper-dim);
+    font-size:1rem;
+    max-width:62ch;
+  }
+  .impacts-text p + p{margin-top:16px;}
+  @media (max-width:760px){
+    .impacts-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- bystander ---------- */
+  .bystander-grid{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:40px;
+  }
+  .bystander-cards{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:rgba(239,238,230,0.12);
+    border:1px solid rgba(239,238,230,0.12);
+  }
+  .bystander-card{
+    background:var(--ink-black);
+    padding:28px;
+  }
+  .bystander-card h3{
+    font-family:var(--font-display);
+    font-size:1.05rem;
+    color:var(--ochre);
+    margin-bottom:10px;
+  }
+  .bystander-card p{
+    margin:0;
+    color:var(--paper-dim);
+    font-size:0.95rem;
+  }
+  @media (max-width:760px){
+    .bystander-grid{grid-template-columns:1fr;}
+    .bystander-cards{grid-template-columns:1fr;}
+  }
+
+  /* ---------- reporting / directory ---------- */
+  .report-grid{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:40px;
+  }
+  .directory{
+    display:grid;
+    gap:0;
+  }
+  .directory-row{
+    display:grid;
+    grid-template-columns:160px 1fr;
+    gap:24px;
+    padding:22px 0;
+    border-bottom:1px solid rgba(239,238,230,0.12);
+  }
+  .directory-row:first-child{border-top:1px solid rgba(239,238,230,0.12);}
+  .directory-label{
+    font-family:var(--font-display);
+    color:var(--sage);
+    font-size:1rem;
+  }
+  .directory-value{
+    color:var(--paper-dim);
+    font-size:0.95rem;
+  }
+  .directory-value strong{color:var(--paper); font-weight:500;}
+  .directory-value div{margin-bottom:6px;}
+  @media (max-width:760px){
+    .report-grid{grid-template-columns:1fr;}
+    .directory-row{grid-template-columns:1fr; gap:6px;}
+  }
+
+  /* ---------- action plan (real sequence -> numbered) ---------- */
+  .plan-grid{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:40px;
+  }
+  .plan-steps{
+    border-left:1px solid rgba(239,238,230,0.18);
+  }
+  .plan-step{
+    position:relative;
+    padding:8px 0 40px 40px;
+  }
+  .plan-step:last-child{padding-bottom:4px;}
+  .plan-step::before{
+    content:attr(data-n);
+    position:absolute;
+    left:-21px; top:2px;
+    width:40px; height:40px;
+    border-radius:50%;
+    background:var(--ink-black);
+    border:1px solid var(--ochre);
+    color:var(--ochre);
+    font-family:var(--font-display);
+    font-size:0.95rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .plan-step h3{
+    font-family:var(--font-display);
+    font-size:1.15rem;
+    color:var(--paper);
+    margin-bottom:8px;
+  }
+  .plan-step p{
+    margin:0;
+    color:var(--paper-dim);
+    font-size:0.97rem;
+    max-width:58ch;
+  }
+  @media (max-width:760px){
+    .plan-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- CTA quote ---------- */
+  .cta-inner{
+    text-align:left;
+    max-width:800px;
+  }
+  .cta-inner .mark{
+    font-family:var(--font-display);
+    font-style:italic;
+    color:var(--ochre);
+    font-size:3rem;
+    line-height:1;
+    display:block;
+    margin-bottom:14px;
+  }
+  .cta-inner blockquote{
+    margin:0;
+    font-family:var(--font-display);
+    font-size:clamp(1.5rem, 3.4vw, 2.2rem);
+    line-height:1.35;
+    color:var(--paper);
+    font-weight:400;
+  }
+  .cta-inner blockquote em{color:var(--sage); font-style:italic;}
+  .quiz-box{
+    margin-top:48px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+    border-top:1px solid rgba(239,238,230,0.15);
+    padding-top:36px;
+  }
+  .quiz-box p{
+    margin:0;
+    color:var(--paper-dim);
+    max-width:38ch;
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    background:var(--ink-black);
+    padding:56px 0 40px;
+    border-top:1px solid rgba(239,238,230,0.08);
+  }
+  .footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:32px;
+    flex-wrap:wrap;
+    margin-bottom:40px;
+  }
+  .footer-brand{
+    font-family:var(--font-display);
+    font-size:1.1rem;
+  }
+  .footer-brand span{color:var(--ochre);}
+  details{
+    margin-top:8px;
+  }
+  summary{
+    cursor:pointer;
+    font-size:0.82rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--sage);
+  }
+  .refs{
+    margin-top:18px;
+    font-size:0.82rem;
+    color:var(--paper-dim);
+    line-height:1.8;
+    columns:2;
+    column-gap:40px;
+  }
+  .refs p{margin:0 0 10px; break-inside:avoid;}
+  .refs a{color:var(--paper-dim); text-decoration:underline; text-underline-offset:2px;}
+  .refs a:hover{color:var(--ochre);}
+  @media (max-width:760px){
+    .refs{columns:1;}
+  }
+  .footer-bottom{
+    font-size:0.78rem;
+    color:rgba(239,238,230,0.4);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  a:focus-visible, button:focus-visible, summary:focus-visible{
+    outline:2px solid var(--ochre);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-inner">
+    <div class="brand">Behind<span>·</span>Screen</div>
+    <nav>
+      <ul>
+        <li><a href="#definition">Concept</a></li>
+        <li><a href="#reporting">Report</a></li>
+        <li><a href="#action-plan">Take Action</a></li>
+        <li><a href="#cta">Quiz</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:140px; border-top:none;">
+  <div class="wrap">
+    <div class="eyebrow-row reveal">
+      <div class="rule"></div>
+      <span>Media &amp; Information Literacy</span>
+    </div>
+    <h1 class="reveal">Behind every screen<br>is <em>a person</em> with feelings.</h1>
+    <p class="lede reveal">A guide to recognizing cyberbullying, practicing good netiquette, and stepping in — for the sharp focus and quiet rebels of the digital world.</p>
+    <div class="hero-cta reveal">
+      <a href="#definition" class="btn btn-solid">Start reading</a>
+      <a href="#cta" class="btn btn-ghost">Take the quiz</a>
+    </div>
+  </div>
+</section>
+
+<!-- DEFINITION -->
+<section id="definition">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">01 — Concept</span>
+      <h2>What counts as cyberbullying</h2>
+    </div>
+    <div class="definition-body reveal">
+      <div></div>
+      <div>
+        <p>Cyberbullying is the use of digital platforms — social media, messaging apps, online games — to harass, threaten, embarrass, or spread harmful information about another person.</p>
+        <p>In Media and Information Literacy, it's treated as a misuse of digital media: a reminder that responsible, ethical communication online is a skill, not an afterthought.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NETIQUETTE -->
+<section id="netiquette">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">02 — Ground rules</span>
+      <h2>Netiquette: the etiquette that keeps disagreement from escalating</h2>
+    </div>
+    <div class="rule-list reveal">
+      <p class="intro">Network etiquette — the social and ethical rules of digital spaces. Screens lower empathy by default, so these rules exist to put it back.</p>
+      <div class="rule-items">
+        <div class="rule-item">
+          <div class="rule-title">Remember the human</div>
+          <p>There's always a person on the receiving end of a message — communicating from behind a screen makes that easy to forget.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-title">Don't feed the escalation</div>
+          <p>Avoid joining or fueling online shouting matches, arguments, and personal attacks.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-title">Watch your tone</div>
+          <p>Skip ALL CAPS and aggressive language — tone is easy to misread in text, and shouting reads exactly as it sounds.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-title">Respect privacy</div>
+          <p>Never share private photos, personal details, or private conversations without consent.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-title">Be an upstander, not a bystander</div>
+          <p>Report abuse, block harassers, and support the people targeted — passivity lets harm continue.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-title">Model the norm</div>
+          <p>Respectful communication is contagious — practicing it directly lowers how often cyberbullying happens in a group.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PSYCHOLOGICAL IMPACTS -->
+<section id="impacts">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">03 — Consequences</span>
+      <h2>What cyberbullying does to the person on the other end</h2>
+    </div>
+    <div class="impacts-grid reveal">
+      <div></div>
+      <div class="impacts-text">
+        <div class="impact-tags">
+          <span class="impact-tag">Depression</span>
+          <span class="impact-tag">Anxiety</span>
+          <span class="impact-tag">Chronic stress</span>
+          <span class="impact-tag">Low self-esteem</span>
+          <span class="impact-tag">Self-harm</span>
+          <span class="impact-tag">Suicidality</span>
+        </div>
+        <p>Depression and anxiety often follow when victims struggle to regulate intense emotions, spiraling into self-blame and excessive worry.</p>
+        <p>Stress and low self-esteem build when repeated harassment leaves someone feeling isolated and overwhelmed, reshaping how they see themselves.</p>
+        <p>At the most serious end, sustained harassment can lead to self-injurious behavior and suicidal thoughts — which is why early intervention matters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BYSTANDER -->
+<section id="bystander">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">04 — Intervention</span>
+      <h2>From bystander to upstander</h2>
+    </div>
+    <div class="bystander-grid reveal">
+      <p class="intro" style="color:var(--paper-dim); font-size:0.98rem; max-width:34ch;">Recognizing digital abuse is only step one — the second is choosing to act instead of scroll past.</p>
+      <div class="bystander-cards">
+        <div class="bystander-card">
+          <h3>Direct</h3>
+          <p>Call out the abusive behavior or defend the target, if it's safe to do so.</p>
+        </div>
+        <div class="bystander-card">
+          <h3>Indirect</h3>
+          <p>Report the post, block the account, or flag the behavior to platform moderators.</p>
+        </div>
+        <div class="bystander-card">
+          <h3>Document</h3>
+          <p>Screenshot abusive messages or posts so proof exists for authorities or school administrators.</p>
+        </div>
+        <div class="bystander-card">
+          <h3>Support</h3>
+          <p>Offer the person being targeted private empathy and resources — it softens the psychological toll.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REPORTING -->
+<section id="reporting">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">05 — Philippines · Where to go</span>
+      <h2>Reporting online harassment</h2>
+    </div>
+    <div class="report-grid reveal">
+      <p class="intro" style="color:var(--paper-dim); font-size:0.98rem; max-width:34ch;">Bring your complaint affidavit and evidence — screenshots, timestamps, usernames — to any of the following.</p>
+      <div class="directory">
+        <div class="directory-row">
+          <div class="directory-label">Hotlines</div>
+          <div class="directory-value">
+            <div><strong>PNP-ACG</strong> — 0968 867 4301 (Smart) · 0967 136 0322 (Globe)</div>
+            <div><strong>Cavite Provincial Cyber Response Team</strong> — 0928 951 1115 · 0939 922 9767</div>
+            <div><strong>DOJ-OCC</strong> — 526-2747 (direct line)</div>
+          </div>
+        </div>
+        <div class="directory-row">
+          <div class="directory-label">Email</div>
+          <div class="directory-value">
+            <div><strong>PNP-ACG</strong> — onlinecims.ocs@gmail.com</div>
+            <div><strong>Cavite Provincial Cyber Response Team</strong> — racu4a.cavitepacrt@gmail.com</div>
+            <div><strong>DOJ-OOC</strong> — cybercrime@doj.gov.ph</div>
+          </div>
+        </div>
+        <div class="directory-row">
+          <div class="directory-label">In person</div>
+          <div class="directory-value">
+            <div><strong>ACG Headquarters</strong> — Camp BGen Rafael T. Crame, Quezon City (beside the PNP LSS building)</div>
+            <div><strong>Cavite Provincial Cyber Response Team</strong> — Camp Gen. Pantaleon Garcia, Poblacion 1-A General Topacio St., Imus, Cavite</div>
+            <div><strong>DOJ-OCC</strong> — De Las Alas Bldg., Department of Justice, P. Faura St., Ermita, Manila</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTION PLAN -->
+<section id="action-plan">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-tag">06 — Empowerment</span>
+      <h2>Five steps, in order, if it happens to you</h2>
+    </div>
+    <div class="plan-grid reveal">
+      <div></div>
+      <div class="plan-steps">
+        <div class="plan-step" data-n="1">
+          <h3>Don't walk into it</h3>
+          <p>Keep exchanges professional and respectful. If a game chat or a comment thread is getting heated, step back before it escalates.</p>
+        </div>
+        <div class="plan-step" data-n="2">
+          <h3>Try to de-escalate</h3>
+          <p>If harassment is starting, talk it out where possible — disagreements can spiral fast, so address it early rather than letting it build.</p>
+        </div>
+        <div class="plan-step" data-n="3">
+          <h3>Cut off contact and get evidence</h3>
+          <p>Once it's no longer discourse but active harassment: block, report, and save clear evidence. Tell someone you trust.</p>
+        </div>
+        <div class="plan-step" data-n="4">
+          <h3>Use the platform's tools</h3>
+          <p>Most platforms have reporting protocols built for exactly this — reporting directly from the platform often stops the harassment outright.</p>
+        </div>
+        <div class="plan-step" data-n="5">
+          <h3>Escalate to the authorities</h3>
+          <p>For defamation, threats, or leaked personal information, report to the police or a local anti-cybercrime unit — in the Philippines, the PNP's Anti-Cybercrime Group.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / QUOTE / QUIZ -->
+<section id="cta">
+  <div class="wrap">
+    <div class="cta-inner reveal">
+      <span class="mark">&ldquo;</span>
+      <blockquote>Behind every screen is a person with feelings. Think before you type, speak up against cyberbullying, and use your <em>digital voice</em> to spread kindness, respect, and support.</blockquote>
+      <div class="quiz-box">
+        <p>Test what you've picked up in a short 15-item quiz.</p>
+        <a href="https://forms.gle/qg1kgxY7WsyAF42y7" target="_blank" rel="noopener" class="btn btn-solid">Take the quiz →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">Behind<span>·</span>Screen</div>
+      <details>
+        <summary>Sources &amp; references</summary>
+        <div class="refs">
+          <p>Hinduja, S., &amp; Patchin, J. W. (2015). <em>Bullying beyond the schoolyard: Preventing and responding to cyberbullying</em> (2nd ed.). Corwin Press.</p>
+          <p>Preece, J. (2004). Etiquette online: From nice to necessary. <em>Communications of the ACM, 47</em>(4), 56–61. <a href="https://doi.org/10.1145/975817.975821" target="_blank" rel="noopener">doi.org/10.1145/975817.975821</a></p>
+          <p>Shea, V. (1994). <em>Netiquette.</em> Educom.</p>
+          <p>Soler-Costa, R., Moreno-Guerrero, A. J., López-Belmonte, J., &amp; Marín-Marín, J. A. (2021). Netiquette: Ethics, education, and behavior on the internet — a systematic literature review. <em>International Journal of Environmental Research and Public Health, 18</em>(3), Article 1189. <a href="https://doi.org/10.3390/ijerph18031189" target="_blank" rel="noopener">doi.org/10.3390/ijerph18031189</a></p>
+          <p>Knoll, M., Li, Y., Liu, Y., &amp; Obsuth, I. (2026). Mechanisms linking cyberbullying victimisation to internalising problems in youth: A systematic review and meta-analytic structural equation modeling. University of Edinburgh. <a href="https://www.sciencedirect.com/science/article/pii/S0272735825001394" target="_blank" rel="noopener">ScienceDirect</a></p>
+          <p>ImPossible Psychological Services. (2025, November 14). Exploring the psychological impact of cyberbullying. <a href="https://www.impossiblepsychservices.com.sg/our-resources/articles/2024/08/21/exploring-the-psychological-impact-of-cyberbullying/" target="_blank" rel="noopener">impossiblepsychservices.com.sg</a></p>
+          <p>Mahzunah, A. K., Murti, B., Paradela, B. V., Sari, I. Y., &amp; Tursina, E. (2024). The impact of cyberbullying on self-harming behavior and suicidal thoughts among adolescents: A meta-analysis. <em>Journal of Health Promotion and Behavior, 9</em>(4). <a href="https://doi.org/10.26911/thejhpb.2024.09.04.07" target="_blank" rel="noopener">doi.org/10.26911/thejhpb.2024.09.04.07</a></p>
+          <p>Padgett, S., &amp; Notar, C. E. (2013). Bystanders are the key to stopping bullying. <em>Universal Journal of Educational Research, 1</em>(2), 33–41. <a href="https://doi.org/10.13189/ujer.2013.010201" target="_blank" rel="noopener">doi.org/10.13189/ujer.2013.010201</a></p>
+          <p>Polanin, J. R., Espelage, D. L., &amp; Pigott, T. D. (2012). A meta-analysis of school-based bullying prevention programs' effects on bystander intervention behavior. <em>School Psychology Review, 41</em>(1), 47–65. <a href="https://doi.org/10.1080/02796015.2012.12087375" target="_blank" rel="noopener">doi.org/10.1080/02796015.2012.12087375</a></p>
+          <p>Republic of the Philippines, Department of Justice. (n.d.). Reporting of cybercrime incidents. <a href="https://www.doj.gov.ph/reporting_cybercrime.html" target="_blank" rel="noopener">doj.gov.ph</a></p>
+          <p>Anti-Cybercrime Group, Philippine National Police. (n.d.). Contact us. <a href="https://acg.pnp.gov.ph/contact-us/" target="_blank" rel="noopener">acg.pnp.gov.ph</a></p>
+          <p>Robinson, L., &amp; Segal, J. (2026). Cyberbullying: Dealing with online bullies. HelpGuide.org. <a href="https://www.helpguide.org/family/parenting/cyberbullying-dealing-online-bullies" target="_blank" rel="noopener">helpguide.org</a></p>
+          <p>UNICEF. (2026). Cyberbullying: What is it and how to stop it. <a href="https://www.unicef.org/stories/how-to-stop-cyberbullying" target="_blank" rel="noopener">unicef.org</a></p>
+        </div>
+      </details>
+    </div>
+    <div class="footer-bottom">
+      <span>Media &amp; Information Literacy — Performance Task</span>
+      <span>Group 2 · Finland</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
